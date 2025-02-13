@@ -16,27 +16,25 @@
   <button id="sendBtn">情人節快樂</button>
   <script>
     async function main() {
-      await liff.init({ liffId: "2006904145-MbWpBN0X" }); // 請將 "YOUR_LIFF_ID" 換成你的 LIFF ID
+      await liff.init({ liffId: "YOUR_LIFF_ID" });  // 請將 "YOUR_LIFF_ID" 換成你的 LIFF ID
 
       if (!liff.isInClient()) {
         alert('請在 LINE 中開啟此應用');
         return;
       }
 
-      // 自動發送訊息
-      liff.sendMessages([
-        { type: 'text', text: 'hello' },
-        { type: 'text', text: 'hello 2' }
-      ]).then(() => {
-        console.log('訊息已送出');
-      }).catch((err) => console.error('發送失敗:', err));
-
       // 按鈕事件
       document.getElementById('sendBtn').addEventListener('click', async () => {
-        await liff.sendMessages([
-          { type: 'image', originalContentUrl: 'https://example.com/valentine.jpg', previewImageUrl: 'https://example.com/valentine.jpg' }
-        ]);
-        alert('圖片已發送！');
+        try {
+          // 發送訊息到與用戶的聊天室（也就是與你的對話）
+          await liff.sendMessages([
+            { type: 'text', text: '這是對方自動發送的訊息！' }
+          ]);
+          alert('訊息已發送！');
+        } catch (err) {
+          console.error('發送失敗:', err);
+          alert('發送失敗：' + err.message);
+        }
       });
     }
 
