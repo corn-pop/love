@@ -12,31 +12,31 @@
   </style>
 </head>
 <body>
-  <h1>±¡¤H¸`§Ö¼Ö¡I</h1>
-  <button id="sendBtn">±¡¤H¸`§Ö¼Ö</button>
+  <h1>æƒ…äººç¯€å¿«æ¨‚ï¼</h1>
+  <button id="sendBtn">æƒ…äººç¯€å¿«æ¨‚</button>
   <script>
     async function main() {
-      await liff.init({ liffId: "YOUR_LIFF_ID" }); // ½Ğ±N "YOUR_LIFF_ID" ´«¦¨§Aªº LIFF ID
+      await liff.init({ liffId: "YOUR_LIFF_ID" }); // è«‹å°‡ "YOUR_LIFF_ID" æ›æˆä½ çš„ LIFF ID
 
       if (!liff.isInClient()) {
-        alert('½Ğ¦b LINE ¤¤¶}±Ò¦¹À³¥Î');
+        alert('è«‹åœ¨ LINE ä¸­é–‹å•Ÿæ­¤æ‡‰ç”¨');
         return;
       }
 
-      // ¦Û°Êµo°e°T®§
+      // è‡ªå‹•ç™¼é€è¨Šæ¯
       liff.sendMessages([
         { type: 'text', text: 'hello' },
         { type: 'text', text: 'hello 2' }
       ]).then(() => {
-        console.log('°T®§¤w°e¥X');
-      }).catch((err) => console.error('µo°e¥¢±Ñ:', err));
+        console.log('è¨Šæ¯å·²é€å‡º');
+      }).catch((err) => console.error('ç™¼é€å¤±æ•—:', err));
 
-      // «ö¶s¨Æ¥ó
+      // æŒ‰éˆ•äº‹ä»¶
       document.getElementById('sendBtn').addEventListener('click', async () => {
         await liff.sendMessages([
           { type: 'image', originalContentUrl: 'https://example.com/valentine.jpg', previewImageUrl: 'https://example.com/valentine.jpg' }
         ]);
-        alert('¹Ï¤ù¤wµo°e¡I');
+        alert('åœ–ç‰‡å·²ç™¼é€ï¼');
       });
     }
 
