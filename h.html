@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LINE LIFF App</title>
+  <script src="https://static.line-scdn.net/liff/edge/2.19.0/sdk.js"></script>
+  <style>
+    body { text-align: center; margin-top: 50px; }
+    button { padding: 10px 20px; font-size: 18px; border-radius: 10px; background-color: #ff5f91; color: white; border: none; }
+    img { margin-top: 20px; max-width: 100%; border-radius: 15px; }
+  </style>
+</head>
+<body>
+  <h1>情人節快樂！</h1>
+  <button id="sendBtn">情人節快樂</button>
+  <script>
+    async function main() {
+      await liff.init({ liffId: "2006904145-MbWpBN0X" });  // 請將 "YOUR_LIFF_ID" 換成你的 LIFF ID
+
+      if (!liff.isInClient()) {
+        alert('請在 LINE 中開啟此應用');
+        return;
+      }
+
+      // 按鈕事件
+      document.getElementById('sendBtn').addEventListener('click', async () => {
+        try {
+          // 發送訊息到與用戶的聊天室（也就是與你的對話）
+          await liff.sendMessages([
+            { type: 'text', text: '這是對方自動發送的訊息！' }
+          ]);
+          alert('訊息已發送！');
+        } catch (err) {
+          console.error('發送失敗:', err);
+          alert('發送失敗：' + err.message);
+        }
+      });
+    }
+
+    main();
+  </script>
+</body>
+</html>
