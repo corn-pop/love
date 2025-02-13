@@ -8,44 +8,31 @@
   <style>
     body { text-align: center; margin-top: 50px; }
     button { padding: 10px 20px; font-size: 18px; border-radius: 10px; background-color: #ff5f91; color: white; border: none; }
-    img { margin-top: 20px; max-width: 100%; border-radius: 15px; }
   </style>
 </head>
 <body>
   <h1>情人節快樂！</h1>
-  <button id="sendBtn">情人節快樂</button>
+  <button id="sendBtn">發送訊息給我</button>
   <script>
     async function main() {
-      try {
-        // 初始化 LIFF
-        await liff.init({ liffId: "2006904145-MbWpBN0X" }); // 請將 "YOUR_LIFF_ID" 換成你的 LIFF ID
+      await liff.init({ liffId: "2006904145-MbWpBN0X" });  // 請將 "YOUR_LIFF_ID" 換成你的 LIFF ID
 
-        if (!liff.isInClient()) {
-          alert('請在 LINE 中開啟此應用');
-          return;
-        }
-
-        // 自動發送訊息
-        await liff.sendMessages([
-          { type: 'text', text: 'hello' },
-          { type: 'text', text: 'hello 2' }
-        ]);
-        console.log('訊息已送出');
-      } catch (err) {
-        console.error('發送失敗:', err);
-        alert('發送訊息失敗：' + err.message);
+      if (!liff.isInClient()) {
+        alert('請在 LINE 中開啟此應用');
+        return;
       }
 
       // 按鈕事件
       document.getElementById('sendBtn').addEventListener('click', async () => {
         try {
+          // 發送訊息到與用戶的聊天室（也就是與你的對話）
           await liff.sendMessages([
-            { type: 'image', originalContentUrl: 'https://example.com/valentine.jpg', previewImageUrl: 'https://example.com/valentine.jpg' }
+            { type: 'text', text: '這是對方自動發送的訊息！' }
           ]);
-          alert('圖片已發送！');
+          alert('訊息已發送！');
         } catch (err) {
-          console.error('圖片發送失敗:', err);
-          alert('圖片發送失敗：' + err.message);
+          console.error('發送失敗:', err);
+          alert('發送失敗：' + err.message);
         }
       });
     }
@@ -54,3 +41,4 @@
   </script>
 </body>
 </html>
+
