@@ -16,27 +16,37 @@
   <button id="sendBtn">情人節快樂</button>
   <script>
     async function main() {
-      await liff.init({ liffId: "2006904145-MbWpBN0X" }); // 請將 "YOUR_LIFF_ID" 換成你的 LIFF ID
+      try {
+        // 初始化 LIFF
+        await liff.init({ liffId: "2006904145-MbWpBN0X" }); // 請將 "YOUR_LIFF_ID" 換成你的 LIFF ID
 
-      if (!liff.isInClient()) {
-        alert('請在 LINE 中開啟此應用');
-        return;
-      }
+        if (!liff.isInClient()) {
+          alert('請在 LINE 中開啟此應用');
+          return;
+        }
 
-      // 自動發送訊息
-      liff.sendMessages([
-        { type: 'text', text: 'hello' },
-        { type: 'text', text: 'hello 2' }
-      ]).then(() => {
+        // 自動發送訊息
+        await liff.sendMessages([
+          { type: 'text', text: 'hello' },
+          { type: 'text', text: 'hello 2' }
+        ]);
         console.log('訊息已送出');
-      }).catch((err) => console.error('發送失敗:', err));
+      } catch (err) {
+        console.error('發送失敗:', err);
+        alert('發送訊息失敗：' + err.message);
+      }
 
       // 按鈕事件
       document.getElementById('sendBtn').addEventListener('click', async () => {
-        await liff.sendMessages([
-          { type: 'image', originalContentUrl: 'https://example.com/valentine.jpg', previewImageUrl: 'https://example.com/valentine.jpg' }
-        ]);
-        alert('圖片已發送！');
+        try {
+          await liff.sendMessages([
+            { type: 'image', originalContentUrl: 'https://example.com/valentine.jpg', previewImageUrl: 'https://example.com/valentine.jpg' }
+          ]);
+          alert('圖片已發送！');
+        } catch (err) {
+          console.error('圖片發送失敗:', err);
+          alert('圖片發送失敗：' + err.message);
+        }
       });
     }
 
